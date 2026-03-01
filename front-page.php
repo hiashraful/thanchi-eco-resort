@@ -50,29 +50,29 @@ $people = thanchi_get_people();
         <div class="flex flex-col gap-8">
             <span class="text-primary font-bold tracking-widest text-sm uppercase"><?php esc_html_e('Our Philosophy', 'thanchi-eco-resort'); ?></span>
             <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight"><?php esc_html_e('This Place Is Not For Everyone', 'thanchi-eco-resort'); ?></h2>
-            <p class="text-lg text-[#7f756c] dark:text-[#a9a29a] leading-relaxed">
+            <p class="text-lg text-[#6b635b] dark:text-[#a9a29a] leading-relaxed">
                 <?php esc_html_e('We don\'t sell luxury. We offer an invitation to disconnect. If you require air-conditioned rooms, 24/7 room service, and television, our wooden retreat might not be what you\'re looking for.', 'thanchi-eco-resort'); ?>
             </p>
             <div class="grid sm:grid-cols-2 gap-6 mt-4">
                 <div class="p-6 bg-white dark:bg-background-dark border border-[#e3e0de] dark:border-[#3a342e] rounded-xl">
                     <span class="material-symbols-outlined text-primary text-3xl mb-4">ac_unit</span>
                     <h3 class="font-bold text-lg mb-2"><?php esc_html_e('No AC/TV', 'thanchi-eco-resort'); ?></h3>
-                    <p class="text-sm text-[#7f756c]"><?php esc_html_e('Replace the drone of machinery with the whisper of the mountain breeze.', 'thanchi-eco-resort'); ?></p>
+                    <p class="text-sm text-[#6b635b]"><?php esc_html_e('Replace the drone of machinery with the whisper of the mountain breeze.', 'thanchi-eco-resort'); ?></p>
                 </div>
                 <div class="p-6 bg-white dark:bg-background-dark border border-[#e3e0de] dark:border-[#3a342e] rounded-xl">
                     <span class="material-symbols-outlined text-primary text-3xl mb-4">terrain</span>
                     <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Steep Climbs', 'thanchi-eco-resort'); ?></h3>
-                    <p class="text-sm text-[#7f756c]"><?php esc_html_e('Built on slopes. Every view is earned with a healthy trek to your room.', 'thanchi-eco-resort'); ?></p>
+                    <p class="text-sm text-[#6b635b]"><?php esc_html_e('Built on slopes. Every view is earned with a healthy trek to your room.', 'thanchi-eco-resort'); ?></p>
                 </div>
                 <div class="p-6 bg-white dark:bg-background-dark border border-[#e3e0de] dark:border-[#3a342e] rounded-xl">
                     <span class="material-symbols-outlined text-primary text-3xl mb-4">eco</span>
                     <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Organic Life', 'thanchi-eco-resort'); ?></h3>
-                    <p class="text-sm text-[#7f756c]"><?php esc_html_e('We serve what the season gives us, sourced from local indigenous farms.', 'thanchi-eco-resort'); ?></p>
+                    <p class="text-sm text-[#6b635b]"><?php esc_html_e('We serve what the season gives us, sourced from local indigenous farms.', 'thanchi-eco-resort'); ?></p>
                 </div>
                 <div class="p-6 bg-white dark:bg-background-dark border border-[#e3e0de] dark:border-[#3a342e] rounded-xl">
                     <span class="material-symbols-outlined text-primary text-3xl mb-4">wifi_off</span>
                     <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Unplugged', 'thanchi-eco-resort'); ?></h3>
-                    <p class="text-sm text-[#7f756c]"><?php esc_html_e('Limited connectivity is a feature, not a bug. Connect with humans instead.', 'thanchi-eco-resort'); ?></p>
+                    <p class="text-sm text-[#6b635b]"><?php esc_html_e('Limited connectivity is a feature, not a bug. Connect with humans instead.', 'thanchi-eco-resort'); ?></p>
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@ $people = thanchi_get_people();
                 <div class="p-6">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="font-serif text-xl font-bold"><?php echo esc_html($room['title']); ?></h3>
-                        <p class="text-primary font-bold">$<?php echo esc_html($room['price']); ?><span class="text-xs text-[#7f756c] font-normal">/<?php esc_html_e('night', 'thanchi-eco-resort'); ?></span></p>
+                        <p class="text-primary font-bold">$<?php echo esc_html($room['price']); ?><span class="text-xs text-[#6b635b] font-normal">/<?php esc_html_e('night', 'thanchi-eco-resort'); ?></span></p>
                     </div>
                     <p class="text-sm text-[#7f756c] dark:text-[#a9a29a] mb-6"><?php echo esc_html($room['description']); ?></p>
                     <a href="<?php echo esc_url(home_url('/rooms/')); ?>" class="block w-full py-3 border border-[#e3e0de] dark:border-[#3a342e] rounded-lg text-sm font-bold text-center hover:bg-primary hover:text-white hover:border-primary transition-all">
@@ -185,7 +185,7 @@ $people = thanchi_get_people();
                     <h3 class="text-xl font-bold font-serif"><?php esc_html_e('Indigenous Dining', 'thanchi-eco-resort'); ?></h3>
                 </div>
             </div>
-            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('Savor organic bamboo shoot dishes and locally brewed hill coffee.', 'thanchi-eco-resort'); ?></p>
+            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Savor organic bamboo shoot dishes and locally brewed hill coffee.', 'thanchi-eco-resort'); ?></p>
         </a>
         <!-- Shop -->
         <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="flex flex-col gap-4 group cursor-pointer">
@@ -196,7 +196,7 @@ $people = thanchi_get_people();
                     <h3 class="text-xl font-bold font-serif"><?php esc_html_e('The Craft Shop', 'thanchi-eco-resort'); ?></h3>
                 </div>
             </div>
-            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('Curated hand-woven textiles and bamboo crafts made by local artisans.', 'thanchi-eco-resort'); ?></p>
+            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Curated hand-woven textiles and bamboo crafts made by local artisans.', 'thanchi-eco-resort'); ?></p>
         </a>
         <!-- Adventure -->
         <a href="<?php echo esc_url(home_url('/about/')); ?>" class="flex flex-col gap-4 group cursor-pointer">
@@ -207,7 +207,7 @@ $people = thanchi_get_people();
                     <h3 class="text-xl font-bold font-serif"><?php esc_html_e('Hill Treks', 'thanchi-eco-resort'); ?></h3>
                 </div>
             </div>
-            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('Guided trails to secret waterfalls and the highest peaks of Thanchi.', 'thanchi-eco-resort'); ?></p>
+            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Guided trails to secret waterfalls and the highest peaks of Thanchi.', 'thanchi-eco-resort'); ?></p>
         </a>
     </div>
 </section>
@@ -227,21 +227,21 @@ $people = thanchi_get_people();
                         <span class="material-symbols-outlined text-primary">location_on</span>
                         <div>
                             <p class="font-bold"><?php esc_html_e('Address', 'thanchi-eco-resort'); ?></p>
-                            <p class="text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('Bolipara, Thanchi Road, Bandarban, Bangladesh', 'thanchi-eco-resort'); ?></p>
+                            <p class="text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Bolipara, Thanchi Road, Bandarban, Bangladesh', 'thanchi-eco-resort'); ?></p>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <span class="material-symbols-outlined text-primary">mail</span>
                         <div>
                             <p class="font-bold"><?php esc_html_e('Enquiries', 'thanchi-eco-resort'); ?></p>
-                            <p class="text-[#7f756c] dark:text-[#a9a29a]">hello@thanchiecoresort.com</p>
+                            <p class="text-[#6b635b] dark:text-[#a9a29a]">hello@thanchiecoresort.com</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
                         <span class="material-symbols-outlined text-primary">call</span>
                         <div>
                             <p class="font-bold"><?php esc_html_e('Reservation Line', 'thanchi-eco-resort'); ?></p>
-                            <p class="text-[#7f756c] dark:text-[#a9a29a]">+880 1234 567 890</p>
+                            <p class="text-[#6b635b] dark:text-[#a9a29a]">+880 1234 567 890</p>
                         </div>
                     </div>
                 </div>

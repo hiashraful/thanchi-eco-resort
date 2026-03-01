@@ -123,27 +123,19 @@ add_action('widgets_init', 'thanchi_widgets_init');
  * Enqueue scripts and styles
  */
 function thanchi_scripts() {
-    // Google Fonts
+    // Local fonts (Inter, Playfair Display, AlinurBoisakh, Material Symbols)
     wp_enqueue_style(
-        'thanchi-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap',
+        'thanchi-fonts',
+        THANCHI_URI . '/assets/css/fonts.css',
         array(),
-        null
-    );
-
-    // Material Symbols Icons
-    wp_enqueue_style(
-        'thanchi-material-icons',
-        'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap',
-        array(),
-        null
+        THANCHI_VERSION
     );
 
     // Main stylesheet
     wp_enqueue_style(
         'thanchi-style',
         get_stylesheet_uri(),
-        array(),
+        array('thanchi-fonts'),
         THANCHI_VERSION
     );
 
@@ -152,6 +144,24 @@ function thanchi_scripts() {
         'thanchi-main',
         THANCHI_URI . '/assets/js/main.js',
         array(),
+        THANCHI_VERSION,
+        true
+    );
+
+    // Translation data
+    wp_enqueue_script(
+        'thanchi-translations',
+        THANCHI_URI . '/assets/js/translations.js',
+        array(),
+        THANCHI_VERSION,
+        true
+    );
+
+    // Language switcher
+    wp_enqueue_script(
+        'thanchi-language-switcher',
+        THANCHI_URI . '/assets/js/language-switcher.js',
+        array('thanchi-translations'),
         THANCHI_VERSION,
         true
     );
@@ -166,6 +176,11 @@ function thanchi_scripts() {
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('thanchi_nonce'),
     ));
+
+    // Pass default language setting to frontend
+    $lang_options = get_option('thanchi_language_options', array());
+    $default_lang = isset($lang_options['default_language']) ? $lang_options['default_language'] : 'en';
+    wp_add_inline_script('thanchi-translations', 'var thanchiLangDefault = "' . esc_js($default_lang) . '";', 'before');
 }
 add_action('wp_enqueue_scripts', 'thanchi_scripts');
 
@@ -181,7 +196,7 @@ function thanchi_tailwind_config() {
             --color-bg-light: #f7f7f6;
             --color-bg-dark: #1d1915;
             --color-text-dark: #161413;
-            --color-text-muted: #7f756c;
+            --color-text-muted: #6b635b;
         }
 
         /* Force text visibility */
@@ -295,8 +310,8 @@ function thanchi_tailwind_config() {
         }
 
         /* Text colors for muted text */
-        .text-\[\#7f756c\] {
-            color: #7f756c !important;
+        .text-\[\#6b635b\] {
+            color: #6b635b !important;
         }
         .text-\[\#a9a29a\] {
             color: #a9a29a !important;
@@ -416,15 +431,19 @@ function thanchi_tailwind_config() {
 add_action('wp_head', 'thanchi_tailwind_config', 100);
 
 /**
- * Preload critical fonts
+ * Preload critical fonts and LCP image
  */
-function thanchi_preload_fonts() {
+function thanchi_preload_critical() {
     ?>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="<?php echo esc_url(THANCHI_URI . '/assets/fonts/Inter/Inter-Variable.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?php echo esc_url(THANCHI_URI . '/assets/fonts/PlayfairDisplay/PlayfairDisplay-Variable.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+    <?php if (is_front_page()) : ?>
+    <link rel="preload" href="<?php echo esc_url(THANCHI_URI . '/assets/images/hero-bg.jpg'); ?>" as="image" fetchpriority="high">
+    <?php endif; ?>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <?php
 }
-add_action('wp_head', 'thanchi_preload_fonts', 1);
+add_action('wp_head', 'thanchi_preload_critical', 1);
 
 /**
  * Add custom classes to body
@@ -781,12 +800,32 @@ require_once THANCHI_DIR . '/inc/customizer.php';
 require_once THANCHI_DIR . '/inc/template-functions.php';
 require_once THANCHI_DIR . '/inc/template-tags.php';
 
+// Admin settings page (also loads frontend hooks for analytics, SEO, dynamic CSS)
+$admin_settings = THANCHI_DIR . '/inc/admin-settings.php';
+if (file_exists($admin_settings)) {
+    require_once $admin_settings;
+}
+
 /**
  * WooCommerce specific functions
  */
 if (class_exists('WooCommerce')) {
     require_once THANCHI_DIR . '/inc/woocommerce.php';
 }
+
+/**
+ * Dequeue unnecessary styles on frontend
+ */
+function thanchi_dequeue_unnecessary() {
+    // Block library CSS - not needed, theme uses Tailwind
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('wc-blocks-style');
+    // Classic theme styles
+    wp_dequeue_style('classic-theme-styles');
+    wp_dequeue_style('global-styles');
+}
+add_action('wp_enqueue_scripts', 'thanchi_dequeue_unnecessary', 100);
 
 /**
  * Remove emoji scripts for performance
@@ -805,10 +844,22 @@ remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wp_shortlink_wp_head');
 
 /**
- * Add defer to scripts
+ * Optimize script loading - defer non-critical, async where possible
  */
-function thanchi_defer_scripts($tag, $handle, $src) {
-    $defer_scripts = array('thanchi-main');
+function thanchi_optimize_scripts($tag, $handle, $src) {
+    if (is_admin()) {
+        return $tag;
+    }
+
+    // Defer these scripts
+    $defer_scripts = array(
+        'thanchi-main',
+        'thanchi-translations',
+        'thanchi-language-switcher',
+        'jquery-core',
+        'wc-order-attribution',
+        'sourcebuster-js',
+    );
 
     if (in_array($handle, $defer_scripts)) {
         return str_replace(' src', ' defer src', $tag);
@@ -816,7 +867,86 @@ function thanchi_defer_scripts($tag, $handle, $src) {
 
     return $tag;
 }
-add_filter('script_loader_tag', 'thanchi_defer_scripts', 10, 3);
+add_filter('script_loader_tag', 'thanchi_optimize_scripts', 10, 3);
+
+/**
+ * Add resource hints for performance
+ */
+function thanchi_resource_hints($urls, $relation_type) {
+    if ($relation_type === 'dns-prefetch') {
+        $urls[] = 'https://cdn.tailwindcss.com';
+    }
+    return $urls;
+}
+add_filter('wp_resource_hints', 'thanchi_resource_hints', 10, 2);
+
+/**
+ * Disable jQuery Migrate on frontend
+ */
+function thanchi_remove_jquery_migrate($scripts) {
+    if (!is_admin() && isset($scripts->registered['jquery'])) {
+        $script = $scripts->registered['jquery'];
+        if ($script->deps) {
+            $script->deps = array_diff($script->deps, array('jquery-migrate'));
+        }
+    }
+}
+add_action('wp_default_scripts', 'thanchi_remove_jquery_migrate');
+
+/**
+ * Add image dimensions to prevent CLS
+ */
+function thanchi_add_image_dimensions($content) {
+    if (is_admin()) {
+        return $content;
+    }
+    // Add decoding="async" to images that don't have it
+    $content = preg_replace(
+        '/<img((?!.*decoding=)[^>]*)>/i',
+        '<img$1 decoding="async">',
+        $content
+    );
+    return $content;
+}
+add_filter('the_content', 'thanchi_add_image_dimensions');
+add_filter('post_thumbnail_html', 'thanchi_add_image_dimensions');
+
+/**
+ * Add fetchpriority="high" to hero/LCP images
+ */
+function thanchi_lcp_image_priority($attr, $attachment, $size) {
+    if (is_front_page() && $size === 'thanchi-hero') {
+        $attr['fetchpriority'] = 'high';
+        $attr['loading'] = 'eager';
+    }
+    return $attr;
+}
+add_filter('wp_get_attachment_image_attributes', 'thanchi_lcp_image_priority', 10, 3);
+
+/**
+ * Remove WordPress version from RSS feeds
+ */
+add_filter('the_generator', '__return_empty_string');
+
+/**
+ * Disable XML-RPC for security
+ */
+add_filter('xmlrpc_enabled', '__return_false');
+
+/**
+ * Remove REST API link from head (security)
+ */
+remove_action('wp_head', 'rest_output_link_wp_head');
+remove_action('template_redirect', 'rest_output_link_header', 11);
+
+/**
+ * Optimize heartbeat API
+ */
+function thanchi_heartbeat_settings($settings) {
+    $settings['interval'] = 60;
+    return $settings;
+}
+add_filter('heartbeat_settings', 'thanchi_heartbeat_settings');
 
 /**
  * Optimize images with lazy loading

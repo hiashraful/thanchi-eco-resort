@@ -13,9 +13,9 @@ get_header();
 ?>
 
 <!-- Page Header -->
-<section class="relative py-32 pt-40 -mt-20 bg-background-dark">
+<section class="relative min-h-[60vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
         <?php the_archive_title('<h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-4">', '</h1>'); ?>
         <?php the_archive_description('<p class="text-lg text-[#a9a29a] max-w-2xl mx-auto">', '</p>'); ?>
     </div>
@@ -45,7 +45,7 @@ get_header();
                         <?php endif; ?>
 
                         <div class="p-6">
-                            <div class="flex items-center gap-4 text-sm text-[#7f756c] dark:text-[#a9a29a] mb-4">
+                            <div class="flex items-center gap-4 text-sm text-[#6b635b] dark:text-[#a9a29a] mb-4">
                                 <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
                             </div>
 
@@ -53,7 +53,7 @@ get_header();
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </h2>
 
-                            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a] line-clamp-3"><?php echo esc_html(get_the_excerpt()); ?></p>
+                            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a] line-clamp-3"><?php echo esc_html(get_the_excerpt()); ?></p>
 
                             <a href="<?php the_permalink(); ?>" class="inline-flex items-center gap-2 text-primary font-bold text-sm mt-4 hover:underline">
                                 <?php esc_html_e('Read More', 'thanchi-eco-resort'); ?>
@@ -90,7 +90,7 @@ get_header();
             <div class="text-center py-16">
                 <span class="material-symbols-outlined text-6xl text-[#e3e0de] dark:text-[#3a342e] mb-6 block">edit_note</span>
                 <h2 class="font-serif text-3xl font-bold mb-4"><?php esc_html_e('Nothing Found', 'thanchi-eco-resort'); ?></h2>
-                <p class="text-[#7f756c] dark:text-[#a9a29a] mb-8"><?php esc_html_e('No posts found in this archive.', 'thanchi-eco-resort'); ?></p>
+                <p class="text-[#6b635b] dark:text-[#a9a29a] mb-8"><?php esc_html_e('No posts found in this archive.', 'thanchi-eco-resort'); ?></p>
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="inline-block bg-primary hover:bg-[#855935] text-white px-8 py-3 rounded-lg font-bold transition-all">
                     <?php esc_html_e('Back to Home', 'thanchi-eco-resort'); ?>
                 </a>

@@ -15,10 +15,10 @@ $menu_items = thanchi_get_menu_items();
 ?>
 
 <!-- Page Header -->
-<section class="relative py-32 pt-40 -mt-20 bg-background-dark">
+<section class="relative min-h-[60vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
     <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('<?php echo esc_url(THANCHI_URI . '/assets/images/experience-food.jpg'); ?>');"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
         <span class="text-primary font-bold tracking-widest text-sm uppercase mb-4 block"><?php esc_html_e('The Kitchen', 'thanchi-eco-resort'); ?></span>
         <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6"><?php esc_html_e('Food at Thanchi Eco Resort', 'thanchi-eco-resort'); ?></h1>
         <p class="text-lg text-[#a9a29a] max-w-2xl mx-auto">
@@ -30,7 +30,7 @@ $menu_items = thanchi_get_menu_items();
 <!-- Introduction -->
 <section class="py-24 bg-background-light dark:bg-background-dark">
     <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center">
-        <p class="text-lg text-[#7f756c] dark:text-[#a9a29a] leading-relaxed">
+        <p class="text-lg text-[#6b635b] dark:text-[#a9a29a] leading-relaxed">
             <?php esc_html_e('Shoriful, our cook, learned from his grandmother. He wakes up at 5 AM to prepare breakfast. The chicken was alive yesterday. The fish was swimming in the river this morning. The vegetables were picked from the hill behind the kitchen. This is not restaurant food. This is home food.', 'thanchi-eco-resort'); ?>
         </p>
     </div>
@@ -71,14 +71,14 @@ $menu_items = thanchi_get_menu_items();
                 <span class="material-symbols-outlined text-primary text-3xl"><?php echo esc_html($section['icon']); ?></span>
                 <h2 class="font-serif text-3xl font-bold"><?php echo esc_html($section['title']); ?></h2>
             </div>
-            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a] mb-8 ml-12"><?php echo esc_html($section['time']); ?></p>
+            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a] mb-8 ml-12"><?php echo esc_html($section['time']); ?></p>
 
             <div class="space-y-0 divide-y divide-[#e3e0de] dark:divide-[#3a342e]">
                 <?php foreach ($menu_items[$key] as $item) : ?>
                     <article class="flex justify-between items-start gap-6 py-6">
                         <div class="flex-1">
                             <h3 class="font-bold text-lg mb-1"><?php echo esc_html($item['name']); ?></h3>
-                            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a]"><?php echo esc_html($item['description']); ?></p>
+                            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php echo esc_html($item['description']); ?></p>
                         </div>
                         <span class="text-primary font-bold text-lg whitespace-nowrap"><?php esc_html_e('BDT', 'thanchi-eco-resort'); ?> <?php echo esc_html($item['price']); ?></span>
                     </article>
@@ -100,24 +100,24 @@ $menu_items = thanchi_get_menu_items();
             <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
                 <span class="material-symbols-outlined text-primary text-2xl mb-3 block">eco</span>
                 <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Vegetarian Options', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('We always have vegetarian options available. Let us know your dietary preferences when you book, and Shoriful will prepare accordingly.', 'thanchi-eco-resort'); ?></p>
+                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('We always have vegetarian options available. Let us know your dietary preferences when you book, and Shoriful will prepare accordingly.', 'thanchi-eco-resort'); ?></p>
             </div>
 
             <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
                 <span class="material-symbols-outlined text-primary text-2xl mb-3 block">restaurant</span>
                 <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Special Requests', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('Want to try cooking over fire yourself? Want to go fishing in the river and have your catch cooked for dinner? Just ask. We love sharing our way of life with guests.', 'thanchi-eco-resort'); ?></p>
+                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Want to try cooking over fire yourself? Want to go fishing in the river and have your catch cooked for dinner? Just ask. We love sharing our way of life with guests.', 'thanchi-eco-resort'); ?></p>
             </div>
 
             <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
                 <span class="material-symbols-outlined text-primary text-2xl mb-3 block">payments</span>
                 <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Meal Packages', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('Full board (breakfast, lunch, dinner): BDT 800 per day per person. Half board (breakfast and dinner): BDT 550 per day per person.', 'thanchi-eco-resort'); ?></p>
+                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Full board (breakfast, lunch, dinner): BDT 800 per day per person. Half board (breakfast and dinner): BDT 550 per day per person.', 'thanchi-eco-resort'); ?></p>
             </div>
         </div>
 
         <div class="text-center mt-12">
-            <p class="italic text-[#7f756c] dark:text-[#a9a29a] mb-6"><?php esc_html_e('Prices may vary based on seasonal availability.', 'thanchi-eco-resort'); ?></p>
+            <p class="italic text-[#6b635b] dark:text-[#a9a29a] mb-6"><?php esc_html_e('Prices may vary based on seasonal availability.', 'thanchi-eco-resort'); ?></p>
             <a href="<?php echo esc_url(home_url('/rooms/')); ?>" class="inline-block bg-primary hover:bg-[#855935] text-white px-10 py-4 rounded-lg font-bold transition-all">
                 <?php esc_html_e('Book Your Stay & Meals', 'thanchi-eco-resort'); ?>
             </a>

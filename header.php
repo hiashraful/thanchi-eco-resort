@@ -14,26 +14,34 @@ if (!defined('ABSPATH')) {
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#1d1915">
+    <script>
+        (function(){var l=localStorage.getItem('thanchi_language');if(l==='bn'){var h=document.documentElement;h.setAttribute('lang','bn');h.classList.add('lang-bn');}})();
+    </script>
 
     <?php // SEO Meta ?>
-    <meta name="description" content="<?php echo esc_attr(is_front_page() ? 'Thanchi Eco Resort - A wooden eco stay in the hills of Thanchi, Bandarban, Bangladesh. Disconnect from network. Reconnect with nature.' : get_the_excerpt()); ?>">
-    <meta name="keywords" content="Thanchi Eco Resort, Hotel in Thanchi, Wooden hotel in Bandarban, Eco resort in Thanchi, Bandarban hotel, Hill resort Bangladesh">
+    <meta name="description" content="<?php echo esc_attr(is_front_page() ? 'Thanchi Eco Resort - A wooden eco stay in the hills of Thanchi, Bandarban, Bangladesh. Disconnect from network. Reconnect with nature.' : wp_strip_all_tags(get_the_excerpt())); ?>">
+    <link rel="canonical" href="<?php echo esc_url(is_front_page() ? home_url('/') : get_permalink()); ?>">
 
     <?php // Open Graph ?>
     <meta property="og:title" content="<?php echo esc_attr(wp_get_document_title()); ?>">
-    <meta property="og:description" content="<?php echo esc_attr(is_front_page() ? 'A wooden eco stay in the hills of Thanchi, Bandarban. No luxury. No city noise. Just hills, river, wood, silence, and real people.' : get_the_excerpt()); ?>">
+    <meta property="og:description" content="<?php echo esc_attr(is_front_page() ? 'A wooden eco stay in the hills of Thanchi, Bandarban. No luxury. No city noise. Just hills, river, wood, silence, and real people.' : wp_strip_all_tags(get_the_excerpt())); ?>">
     <meta property="og:type" content="<?php echo is_singular('post') ? 'article' : 'website'; ?>">
-    <meta property="og:url" content="<?php echo esc_url(get_permalink()); ?>">
-    <meta property="og:site_name" content="Thanchi Eco Resort">
+    <meta property="og:url" content="<?php echo esc_url(is_front_page() ? home_url('/') : get_permalink()); ?>">
+    <meta property="og:site_name" content="<?php bloginfo('name'); ?>">
+    <meta property="og:locale" content="en_US">
     <?php if (has_post_thumbnail()) : ?>
         <meta property="og:image" content="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+    <?php elseif (is_front_page()) : ?>
+        <meta property="og:image" content="<?php echo esc_url(THANCHI_URI . '/assets/images/hero-bg.jpg'); ?>">
     <?php endif; ?>
 
     <?php // Twitter Card ?>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?php echo esc_attr(wp_get_document_title()); ?>">
-    <meta name="twitter:description" content="<?php echo esc_attr(is_front_page() ? 'A wooden eco stay in the hills of Thanchi, Bandarban.' : get_the_excerpt()); ?>">
+    <meta name="twitter:description" content="<?php echo esc_attr(is_front_page() ? 'A wooden eco stay in the hills of Thanchi, Bandarban.' : wp_strip_all_tags(get_the_excerpt())); ?>">
 
     <?php // Geo Tags for Local SEO ?>
     <meta name="geo.region" content="BD-B">
@@ -41,7 +49,17 @@ if (!defined('ABSPATH')) {
     <meta name="geo.position" content="21.7547;92.4847">
     <meta name="ICBM" content="21.7547, 92.4847">
 
-    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <!-- Critical CSS to prevent layout shift before Tailwind loads -->
+    <style>
+        html { overflow-y: scroll; }
+        body { margin: 0; font-family: Inter, system-ui, -apple-system, sans-serif; background: #f7f7f6; color: #161413; }
+        header { position: fixed; top: 0; z-index: 50; width: 100%; }
+        header > div { display: flex; align-items: center; justify-content: space-between; height: 5rem; max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
+        header nav:not(#mobile-menu) { display: none; }
+        #mobile-menu { display: none; }
+        @media (min-width: 1024px) { header nav:not(#mobile-menu) { display: flex; align-items: center; gap: 2rem; } }
+        .site-main > section:first-child { margin-top: -5rem; }
+    </style>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -56,8 +74,9 @@ if (!defined('ABSPATH')) {
                         "background-dark": "#1d1915",
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "serif": ["Playfair Display", "serif"],
+                        "display": ["Inter", "system-ui", "-apple-system", "sans-serif"],
+                        "serif": ["Playfair Display", "Georgia", "Times New Roman", "serif"],
+                        "bengali": ["AlinurBoisakh", "Inter", "Noto Sans Bengali", "system-ui", "sans-serif"],
                     },
                     borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
                 },
@@ -68,7 +87,7 @@ if (!defined('ABSPATH')) {
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('bg-background-light dark:bg-background-dark font-display text-[#161413] dark:text-white transition-colors duration-300'); ?>>
+<body <?php body_class('bg-background-light dark:bg-background-dark font-display text-[#161413] dark:text-white transition-colors duration-300'); ?> itemscope itemtype="https://schema.org/WebPage">
 <?php wp_body_open(); ?>
 
 <a class="skip-link screen-reader-text" href="#main-content">

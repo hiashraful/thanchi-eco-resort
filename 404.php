@@ -13,9 +13,9 @@ get_header();
 ?>
 
 <!-- 404 Section -->
-<section class="relative py-32 pt-40 -mt-20 bg-background-dark min-h-[80vh] flex items-center">
+<section class="relative min-h-[80vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center" aria-labelledby="error-title">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full" aria-labelledby="error-title">
         <p class="text-[120px] md:text-[180px] font-serif font-bold text-primary/30 leading-none mb-0" aria-hidden="true">404</p>
         <h1 id="error-title" class="font-serif text-4xl md:text-5xl font-bold text-white mb-6 -mt-8"><?php esc_html_e('Page Not Found', 'thanchi-eco-resort'); ?></h1>
         <p class="text-lg text-[#a9a29a] max-w-2xl mx-auto mb-10">

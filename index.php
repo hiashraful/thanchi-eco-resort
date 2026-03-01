@@ -13,10 +13,10 @@ get_header();
 ?>
 
 <!-- Page Header -->
-<section class="relative py-32 pt-40 -mt-20 bg-background-dark">
+<section class="relative min-h-[60vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
     <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('<?php echo esc_url(THANCHI_URI . '/assets/images/blog-header.jpg'); ?>');"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
         <span class="text-primary font-bold tracking-widest text-sm uppercase mb-4 block"><?php esc_html_e('Stories & Guides', 'thanchi-eco-resort'); ?></span>
         <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6"><?php esc_html_e('Travel Stories & Tips', 'thanchi-eco-resort'); ?></h1>
         <p class="text-lg text-[#a9a29a] max-w-2xl mx-auto">
@@ -49,7 +49,7 @@ get_header();
                         <?php endif; ?>
 
                         <div class="p-6">
-                            <div class="flex items-center gap-4 text-sm text-[#7f756c] dark:text-[#a9a29a] mb-4">
+                            <div class="flex items-center gap-4 text-sm text-[#6b635b] dark:text-[#a9a29a] mb-4">
                                 <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
                                 <?php if (has_category()) : ?>
                                     <span>&middot;</span>
@@ -61,7 +61,7 @@ get_header();
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </h2>
 
-                            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a] line-clamp-3"><?php echo esc_html(get_the_excerpt()); ?></p>
+                            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a] line-clamp-3"><?php echo esc_html(get_the_excerpt()); ?></p>
 
                             <a href="<?php the_permalink(); ?>" class="inline-flex items-center gap-2 text-primary font-bold text-sm mt-4 hover:underline">
                                 <?php esc_html_e('Read More', 'thanchi-eco-resort'); ?>
@@ -98,13 +98,13 @@ get_header();
             <div class="text-center py-16">
                 <span class="material-symbols-outlined text-6xl text-[#e3e0de] dark:text-[#3a342e] mb-6 block">edit_note</span>
                 <h2 class="font-serif text-3xl font-bold mb-4"><?php esc_html_e('No Posts Yet', 'thanchi-eco-resort'); ?></h2>
-                <p class="text-[#7f756c] dark:text-[#a9a29a] mb-8 max-w-md mx-auto">
+                <p class="text-[#6b635b] dark:text-[#a9a29a] mb-8 max-w-md mx-auto">
                     <?php esc_html_e('We are working on sharing stories from Thanchi. Check back soon.', 'thanchi-eco-resort'); ?>
                 </p>
 
                 <div class="max-w-md mx-auto text-left bg-white dark:bg-[#25211c] rounded-xl p-6">
                     <h3 class="font-bold mb-4"><?php esc_html_e('Coming Soon:', 'thanchi-eco-resort'); ?></h3>
-                    <ul class="space-y-3 text-[#7f756c] dark:text-[#a9a29a]">
+                    <ul class="space-y-3 text-[#6b635b] dark:text-[#a9a29a]">
                         <li class="flex items-center gap-3">
                             <span class="material-symbols-outlined text-primary">schedule</span>
                             <?php esc_html_e('How to Reach Thanchi from Bandarban', 'thanchi-eco-resort'); ?>

@@ -13,9 +13,9 @@ get_header();
 ?>
 
 <!-- Page Header -->
-<section class="relative py-32 pt-40 -mt-20 bg-background-dark">
+<section class="relative min-h-[60vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
         <h1 class="font-serif text-4xl md:text-5xl font-bold text-white">
             <?php
             printf(
@@ -33,7 +33,7 @@ get_header();
 
         <?php if (have_posts()) : ?>
 
-            <p class="text-center text-[#7f756c] dark:text-[#a9a29a] mb-12">
+            <p class="text-center text-[#6b635b] dark:text-[#a9a29a] mb-12">
                 <?php
                 printf(
                     esc_html(_n('Found %d result', 'Found %d results', $wp_query->found_posts, 'thanchi-eco-resort')),
@@ -60,7 +60,7 @@ get_header();
                         <?php endif; ?>
 
                         <div class="p-6">
-                            <div class="flex items-center gap-4 text-sm text-[#7f756c] dark:text-[#a9a29a] mb-4">
+                            <div class="flex items-center gap-4 text-sm text-[#6b635b] dark:text-[#a9a29a] mb-4">
                                 <span><?php echo esc_html(get_post_type_object(get_post_type())->labels->singular_name); ?></span>
                                 <span>&middot;</span>
                                 <time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date()); ?></time>
@@ -70,7 +70,7 @@ get_header();
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </h2>
 
-                            <p class="text-sm text-[#7f756c] dark:text-[#a9a29a] line-clamp-3"><?php echo esc_html(get_the_excerpt()); ?></p>
+                            <p class="text-sm text-[#6b635b] dark:text-[#a9a29a] line-clamp-3"><?php echo esc_html(get_the_excerpt()); ?></p>
                         </div>
                     </article>
                 <?php endwhile; ?>
@@ -102,7 +102,7 @@ get_header();
             <div class="text-center py-16">
                 <span class="material-symbols-outlined text-6xl text-[#e3e0de] dark:text-[#3a342e] mb-6 block">search_off</span>
                 <h2 class="font-serif text-3xl font-bold mb-4"><?php esc_html_e('Nothing Found', 'thanchi-eco-resort'); ?></h2>
-                <p class="text-[#7f756c] dark:text-[#a9a29a] mb-8 max-w-md mx-auto">
+                <p class="text-[#6b635b] dark:text-[#a9a29a] mb-8 max-w-md mx-auto">
                     <?php esc_html_e('Sorry, we could not find anything matching your search. Please try different keywords.', 'thanchi-eco-resort'); ?>
                 </p>
 
@@ -118,7 +118,7 @@ get_header();
                     </div>
                 </form>
 
-                <p class="text-[#7f756c] dark:text-[#a9a29a] mb-4"><?php esc_html_e('Or explore our popular pages:', 'thanchi-eco-resort'); ?></p>
+                <p class="text-[#6b635b] dark:text-[#a9a29a] mb-4"><?php esc_html_e('Or explore our popular pages:', 'thanchi-eco-resort'); ?></p>
                 <div class="flex gap-4 justify-center flex-wrap">
                     <a href="<?php echo esc_url(home_url('/rooms/')); ?>" class="bg-white/10 backdrop-blur-md border border-[#e3e0de] dark:border-[#3a342e] px-6 py-2.5 rounded-lg font-bold hover:text-primary transition-all"><?php esc_html_e('Rooms', 'thanchi-eco-resort'); ?></a>
                     <a href="<?php echo esc_url(home_url('/restaurant/')); ?>" class="bg-white/10 backdrop-blur-md border border-[#e3e0de] dark:border-[#3a342e] px-6 py-2.5 rounded-lg font-bold hover:text-primary transition-all"><?php esc_html_e('Restaurant', 'thanchi-eco-resort'); ?></a>

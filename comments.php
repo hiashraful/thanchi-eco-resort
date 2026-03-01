@@ -51,7 +51,7 @@ if (post_password_required()) {
         <?php the_comments_navigation(); ?>
 
         <?php if (!comments_open()) : ?>
-            <p class="text-center p-6 bg-[#f2f1ef] dark:bg-[#25211c] rounded-xl text-[#7f756c] dark:text-[#a9a29a] mt-8">
+            <p class="text-center p-6 bg-[#f2f1ef] dark:bg-[#25211c] rounded-xl text-[#6b635b] dark:text-[#a9a29a] mt-8">
                 <?php esc_html_e('Comments are closed.', 'thanchi-eco-resort'); ?>
             </p>
         <?php endif; ?>

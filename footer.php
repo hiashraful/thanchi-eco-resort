@@ -56,7 +56,7 @@ if (!defined('ABSPATH')) {
                 <h3 class="text-white font-bold mb-6"><?php esc_html_e('Newsletter', 'thanchi-eco-resort'); ?></h3>
                 <p class="text-sm mb-4"><?php esc_html_e('Updates on nature treks and seasonal menus.', 'thanchi-eco-resort'); ?></p>
                 <form class="flex gap-2" action="#" method="post">
-                    <input type="email" name="email" class="bg-[#2a241f] border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-1 focus:ring-primary text-white placeholder-[#7f756c]" placeholder="<?php esc_attr_e('Your email', 'thanchi-eco-resort'); ?>" required>
+                    <input type="email" name="email" class="bg-[#2a241f] border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-1 focus:ring-primary text-white placeholder-[#6b635b]" placeholder="<?php esc_attr_e('Your email', 'thanchi-eco-resort'); ?>" required>
                     <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-[#855935] transition-colors" aria-label="<?php esc_attr_e('Subscribe', 'thanchi-eco-resort'); ?>">
                         <span class="material-symbols-outlined text-sm">send</span>
                     </button>

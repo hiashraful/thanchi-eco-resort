@@ -13,9 +13,9 @@ get_header();
 ?>
 
 <!-- Page Header -->
-<section class="relative py-32 pt-40 -mt-20 bg-background-dark">
+<section class="relative min-h-[60vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
         <span class="text-primary font-bold tracking-widest text-sm uppercase mb-4 block"><?php esc_html_e('Get In Touch', 'thanchi-eco-resort'); ?></span>
         <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6"><?php esc_html_e('Contact Us', 'thanchi-eco-resort'); ?></h1>
         <p class="text-lg text-[#a9a29a] max-w-2xl mx-auto">
@@ -40,7 +40,7 @@ get_header();
                         </div>
                         <div>
                             <p class="font-bold mb-1"><?php esc_html_e('Phone', 'thanchi-eco-resort'); ?></p>
-                            <p class="text-[#7f756c] dark:text-[#a9a29a]">
+                            <p class="text-[#6b635b] dark:text-[#a9a29a]">
                                 <a href="tel:+8801234567890" class="hover:text-primary transition-colors">+880 1234 567 890</a>
                             </p>
                         </div>
@@ -52,10 +52,10 @@ get_header();
                         </div>
                         <div>
                             <p class="font-bold mb-1"><?php esc_html_e('WhatsApp (Preferred)', 'thanchi-eco-resort'); ?></p>
-                            <p class="text-[#7f756c] dark:text-[#a9a29a]">
+                            <p class="text-[#6b635b] dark:text-[#a9a29a]">
                                 <a href="https://wa.me/8801234567890" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">+880 1234 567 890</a>
                             </p>
-                            <p class="text-xs text-[#7f756c] mt-1">
+                            <p class="text-xs text-[#6b635b] mt-1">
                                 <?php esc_html_e('Note: Network in Thanchi is limited. We check WhatsApp when we go to town.', 'thanchi-eco-resort'); ?>
                             </p>
                         </div>
@@ -67,7 +67,7 @@ get_header();
                         </div>
                         <div>
                             <p class="font-bold mb-1"><?php esc_html_e('Email', 'thanchi-eco-resort'); ?></p>
-                            <p class="text-[#7f756c] dark:text-[#a9a29a]">
+                            <p class="text-[#6b635b] dark:text-[#a9a29a]">
                                 <a href="mailto:hello@thanchiecoresort.com" class="hover:text-primary transition-colors">hello@thanchiecoresort.com</a>
                             </p>
                         </div>
@@ -79,7 +79,7 @@ get_header();
                         </div>
                         <div>
                             <p class="font-bold mb-1"><?php esc_html_e('Address', 'thanchi-eco-resort'); ?></p>
-                            <p class="text-[#7f756c] dark:text-[#a9a29a]">
+                            <p class="text-[#6b635b] dark:text-[#a9a29a]">
                                 <?php esc_html_e('Thanchi Eco Resort', 'thanchi-eco-resort'); ?><br>
                                 <?php esc_html_e('Thanchi Upazila', 'thanchi-eco-resort'); ?><br>
                                 <?php esc_html_e('Bandarban Hill District', 'thanchi-eco-resort'); ?><br>
@@ -93,7 +93,7 @@ get_header();
                 <div class="mt-12 pt-12 border-t border-[#e3e0de] dark:border-[#3a342e]">
                     <h3 class="font-serif text-2xl font-bold mb-6"><?php esc_html_e('How to Reach Thanchi', 'thanchi-eco-resort'); ?></h3>
 
-                    <div class="space-y-6 text-sm text-[#7f756c] dark:text-[#a9a29a]">
+                    <div class="space-y-6 text-sm text-[#6b635b] dark:text-[#a9a29a]">
                         <div>
                             <p class="font-bold text-[#161413] dark:text-white mb-1"><?php esc_html_e('From Dhaka:', 'thanchi-eco-resort'); ?></p>
                             <p><?php esc_html_e('Take a bus to Bandarban town (8-10 hours overnight). From Bandarban, take a local bus to Thanchi (3-4 hours, stunning views). We can pick you up from Thanchi bus stand.', 'thanchi-eco-resort'); ?></p>
@@ -170,7 +170,7 @@ get_header();
                             <?php esc_html_e('Send Message', 'thanchi-eco-resort'); ?>
                         </button>
 
-                        <p class="text-xs text-[#7f756c] dark:text-[#a9a29a] text-center">
+                        <p class="text-xs text-[#6b635b] dark:text-[#a9a29a] text-center">
                             <?php esc_html_e('We usually respond within 24-48 hours. For urgent bookings, please use WhatsApp.', 'thanchi-eco-resort'); ?>
                         </p>
                     </form>
@@ -200,7 +200,7 @@ get_header();
             ></iframe>
         </div>
 
-        <p class="text-center mt-6 text-sm text-[#7f756c] dark:text-[#a9a29a]">
+        <p class="text-center mt-6 text-sm text-[#6b635b] dark:text-[#a9a29a]">
             <?php esc_html_e('GPS Coordinates: 21.7547, 92.4847 (approximate - exact location shared after booking)', 'thanchi-eco-resort'); ?>
         </p>
     </div>
