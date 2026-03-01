@@ -1,0 +1,386 @@
+/*
+Theme Name: Thanchi Eco Resort
+Theme URI: https://thanchi-eco-resort.com
+Author: Thanchi Eco Resort Team
+Author URI: https://thanchi-eco-resort.com
+Description: A minimal, earthy, production-ready WordPress theme for Thanchi Eco Resort - a wooden eco stay in the hills of Thanchi, Bandarban, Bangladesh. SEO optimized, WCAG accessible, WooCommerce compatible. Built with Tailwind CSS.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: thanchi-eco-resort
+Tags: eco-friendly, hotel, booking, woocommerce, accessible, responsive, custom-logo, custom-menu, featured-images, translation-ready
+
+Thanchi Eco Resort Theme - Disconnect from network. Reconnect with nature.
+*/
+
+/* ==========================================================================
+   Base Styles (Tailwind handles most styling via CDN)
+   ========================================================================== */
+
+/* WordPress Core Alignments */
+.alignwide {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignfull {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+/* WordPress Image Captions */
+.wp-caption {
+    max-width: 100%;
+}
+
+.wp-caption-text {
+    font-size: 0.875rem;
+    color: #7f756c;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* WordPress Galleries */
+.gallery {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+.gallery-columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery-columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+/* WordPress Comments */
+.comment-list {
+    list-style: none;
+    padding: 0;
+}
+
+.comment-list .children {
+    list-style: none;
+    padding-left: 2rem;
+    margin-top: 1rem;
+}
+
+/* WordPress Pagination */
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.page-numbers:hover {
+    background-color: #9c6b40;
+    color: #fff;
+}
+
+.page-numbers.current {
+    background-color: #9c6b40;
+    color: #fff;
+}
+
+/* ==========================================================================
+   WooCommerce Overrides
+   ========================================================================== */
+
+.woocommerce ul.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.woocommerce ul.products li.product {
+    background-color: #fff;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 0;
+    padding: 0;
+    float: none;
+    width: auto;
+}
+
+.woocommerce ul.products li.product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.woocommerce ul.products li.product a img {
+    margin: 0;
+    border-radius: 0;
+}
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.125rem;
+    padding: 1rem 1rem 0.25rem;
+    margin: 0;
+}
+
+.woocommerce ul.products li.product .price {
+    color: #9c6b40;
+    padding: 0 1rem;
+    font-weight: 600;
+}
+
+.woocommerce ul.products li.product .button {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    text-align: center;
+    display: block;
+}
+
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button {
+    background-color: #9c6b40;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover {
+    background-color: #855935;
+    color: #fff;
+}
+
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt {
+    background-color: #1d1915;
+}
+
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt:hover {
+    background-color: #2a241f;
+}
+
+/* WooCommerce Form Fields */
+.woocommerce form .form-row {
+    margin-bottom: 1rem;
+}
+
+.woocommerce form .form-row label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea,
+.woocommerce form .form-row select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e3e0de;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.woocommerce form .form-row input.input-text:focus,
+.woocommerce form .form-row textarea:focus,
+.woocommerce form .form-row select:focus {
+    outline: none;
+    border-color: #9c6b40;
+    box-shadow: 0 0 0 3px rgba(156, 107, 64, 0.1);
+}
+
+/* WooCommerce Tables */
+.woocommerce table.shop_table {
+    border-collapse: collapse;
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td {
+    border: none;
+    border-bottom: 1px solid #e3e0de;
+    padding: 1rem;
+}
+
+.woocommerce table.shop_table th {
+    font-weight: 600;
+    background-color: #f7f7f6;
+}
+
+/* ==========================================================================
+   Page-Specific Styles
+   ========================================================================== */
+
+/* Page Header */
+.page-header-custom {
+    padding-top: calc(5rem + 6rem);
+    padding-bottom: 3rem;
+    background-color: #1d1915;
+    text-align: center;
+}
+
+/* Blog Cards */
+.blog-card {
+    background-color: #fff;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu Items (Restaurant) */
+.menu-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.menu-item-card:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Dark Mode Support
+   ========================================================================== */
+
+.dark .blog-card,
+.dark .menu-item-card,
+.dark .woocommerce ul.products li.product {
+    background-color: #1d1915;
+    border: 1px solid #3a342e;
+}
+
+.dark .woocommerce table.shop_table th {
+    background-color: #25211c;
+}
+
+.dark .woocommerce table.shop_table th,
+.dark .woocommerce table.shop_table td {
+    border-bottom-color: #3a342e;
+}
+
+.dark .woocommerce form .form-row input.input-text,
+.dark .woocommerce form .form-row textarea,
+.dark .woocommerce form .form-row select {
+    background-color: #2a241f;
+    border-color: #3a342e;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    header,
+    footer,
+    .menu-toggle,
+    .back-to-top,
+    .btn,
+    button {
+        display: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    main {
+        padding: 0;
+    }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero-gradient + div {
+        transform: none !important;
+    }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+/* Custom focus styles for accessibility */
+.keyboard-navigation *:focus {
+    outline: 2px solid #9c6b40;
+    outline-offset: 2px;
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
