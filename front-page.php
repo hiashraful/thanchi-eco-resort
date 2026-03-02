@@ -135,7 +135,7 @@ $people = thanchi_get_people();
                         <h3 class="font-serif text-xl font-bold"><?php echo esc_html($room['title']); ?></h3>
                         <p class="text-primary font-bold">$<?php echo esc_html($room['price']); ?><span class="text-xs text-[#6b635b] font-normal">/<?php esc_html_e('night', 'thanchi-eco-resort'); ?></span></p>
                     </div>
-                    <p class="text-sm text-[#7f756c] dark:text-[#a9a29a] mb-6"><?php echo esc_html($room['description']); ?></p>
+                    <p class="text-sm text-[#6b635b] dark:text-[#a9a29a] mb-6"><?php echo esc_html($room['description']); ?></p>
                     <a href="<?php echo esc_url(home_url('/rooms/')); ?>" class="block w-full py-3 border border-[#e3e0de] dark:border-[#3a342e] rounded-lg text-sm font-bold text-center hover:bg-primary hover:text-white hover:border-primary transition-all">
                         <?php esc_html_e('View Details', 'thanchi-eco-resort'); ?>
                     </a>
@@ -173,7 +173,7 @@ $people = thanchi_get_people();
 <section class="py-24 px-6 lg:px-12 max-w-7xl mx-auto">
     <div class="text-center mb-16">
         <h2 class="font-serif text-4xl font-bold mb-4"><?php esc_html_e('Experiences Beyond the Room', 'thanchi-eco-resort'); ?></h2>
-        <p class="text-[#7f756c] dark:text-[#a9a29a]"><?php esc_html_e('Immerse yourself in the rhythms of the Bandarban hills.', 'thanchi-eco-resort'); ?></p>
+        <p class="text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Immerse yourself in the rhythms of the Bandarban hills.', 'thanchi-eco-resort'); ?></p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Food -->
@@ -250,6 +250,17 @@ $people = thanchi_get_people();
                 </a>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- Closing Note -->
+<section class="py-24 bg-[#f2f1ef] dark:bg-[#25211c]">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+        <span class="text-primary font-bold tracking-widest text-sm uppercase mb-6 block"><?php esc_html_e('A Gentle Reminder', 'thanchi-eco-resort'); ?></span>
+        <p class="font-serif text-2xl md:text-3xl leading-relaxed text-[#161413] dark:text-white">
+            <?php esc_html_e('You won\'t find too much at Thanchi Eco Resort.', 'thanchi-eco-resort'); ?><br>
+            <span class="text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('But what you will find is hard to find in the city — silence, time, and a chance to meet yourself.', 'thanchi-eco-resort'); ?></span>
+        </p>
     </div>
 </section>
 
