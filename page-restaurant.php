@@ -12,17 +12,69 @@ if (!defined('ABSPATH')) {
 get_header();
 
 $menu_items = thanchi_get_menu_items();
+
+// Header defaults
+$header_image       = thanchi_setting( 'page_restaurant', 'header_image', '' );
+$header_label       = thanchi_setting( 'page_restaurant', 'header_label', '' );
+$header_title       = thanchi_setting( 'page_restaurant', 'header_title', '' );
+$header_description = thanchi_setting( 'page_restaurant', 'header_description', '' );
+
+if ( empty( $header_label ) ) {
+    $header_label = __( 'The Kitchen', 'thanchi-eco-resort' );
+}
+if ( empty( $header_title ) ) {
+    $header_title = __( 'Food at Thanchi Eco Resort', 'thanchi-eco-resort' );
+}
+if ( empty( $header_description ) ) {
+    $header_description = __( 'Every dish is cooked over fire with ingredients from the hills. No frozen food. No imported ingredients. Just honest, local cooking.', 'thanchi-eco-resort' );
+}
+
+$header_bg_url = ! empty( $header_image ) ? $header_image : THANCHI_URI . '/assets/images/experience-food.jpg';
+
+// Introduction
+$intro_text = thanchi_setting( 'page_restaurant', 'intro_text', '' );
+if ( empty( $intro_text ) ) {
+    $intro_text = __( 'Shoriful, our cook, learned from his grandmother. He wakes up at 5 AM to prepare breakfast. The chicken was alive yesterday. The fish was swimming in the river this morning. The vegetables were picked from the hill behind the kitchen. This is not restaurant food. This is home food.', 'thanchi-eco-resort' );
+}
+
+// Food notes
+$food_notes = thanchi_setting( 'page_restaurant', 'food_notes', array() );
+if ( empty( $food_notes ) ) {
+    $food_notes = array(
+        array(
+            'icon'        => 'eco',
+            'title'       => __( 'Vegetarian Options', 'thanchi-eco-resort' ),
+            'description' => __( 'We always have vegetarian options available. Let us know your dietary preferences when you book, and Shoriful will prepare accordingly.', 'thanchi-eco-resort' ),
+        ),
+        array(
+            'icon'        => 'restaurant',
+            'title'       => __( 'Special Requests', 'thanchi-eco-resort' ),
+            'description' => __( 'Want to try cooking over fire yourself? Want to go fishing in the river and have your catch cooked for dinner? Just ask. We love sharing our way of life with guests.', 'thanchi-eco-resort' ),
+        ),
+        array(
+            'icon'        => 'payments',
+            'title'       => __( 'Meal Packages', 'thanchi-eco-resort' ),
+            'description' => __( 'Full board (breakfast, lunch, dinner): BDT 800 per day per person. Half board (breakfast and dinner): BDT 550 per day per person.', 'thanchi-eco-resort' ),
+        ),
+    );
+}
+
+// Pricing text
+$pricing_text = thanchi_setting( 'page_restaurant', 'pricing_text', '' );
+if ( empty( $pricing_text ) ) {
+    $pricing_text = __( 'Prices may vary based on seasonal availability.', 'thanchi-eco-resort' );
+}
 ?>
 
 <!-- Page Header -->
 <section class="relative min-h-[60vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
-    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('<?php echo esc_url(THANCHI_URI . '/assets/images/experience-food.jpg'); ?>');"></div>
+    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('<?php echo esc_url( $header_bg_url ); ?>');"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
-        <span class="text-primary font-bold tracking-widest text-sm uppercase mb-4 block"><?php esc_html_e('The Kitchen', 'thanchi-eco-resort'); ?></span>
-        <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6"><?php esc_html_e('Food at Thanchi Eco Resort', 'thanchi-eco-resort'); ?></h1>
+        <span class="text-primary font-bold tracking-widest text-sm uppercase mb-4 block"><?php echo esc_html( $header_label ); ?></span>
+        <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6"><?php echo esc_html( $header_title ); ?></h1>
         <p class="text-lg text-[#a9a29a] max-w-2xl mx-auto">
-            <?php esc_html_e('Every dish is cooked over fire with ingredients from the hills. No frozen food. No imported ingredients. Just honest, local cooking.', 'thanchi-eco-resort'); ?>
+            <?php echo esc_html( $header_description ); ?>
         </p>
     </div>
 </section>
@@ -31,7 +83,7 @@ $menu_items = thanchi_get_menu_items();
 <section class="py-24 bg-background-light dark:bg-background-dark">
     <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center">
         <p class="text-lg text-[#6b635b] dark:text-[#a9a29a] leading-relaxed">
-            <?php esc_html_e('Shoriful, our cook, learned from his grandmother. He wakes up at 5 AM to prepare breakfast. The chicken was alive yesterday. The fish was swimming in the river this morning. The vegetables were picked from the hill behind the kitchen. This is not restaurant food. This is home food.', 'thanchi-eco-resort'); ?>
+            <?php echo esc_html( $intro_text ); ?>
         </p>
     </div>
 </section>
@@ -97,27 +149,17 @@ $menu_items = thanchi_get_menu_items();
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
-                <span class="material-symbols-outlined text-primary text-2xl mb-3 block">eco</span>
-                <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Vegetarian Options', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('We always have vegetarian options available. Let us know your dietary preferences when you book, and Shoriful will prepare accordingly.', 'thanchi-eco-resort'); ?></p>
-            </div>
-
-            <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
-                <span class="material-symbols-outlined text-primary text-2xl mb-3 block">restaurant</span>
-                <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Special Requests', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Want to try cooking over fire yourself? Want to go fishing in the river and have your catch cooked for dinner? Just ask. We love sharing our way of life with guests.', 'thanchi-eco-resort'); ?></p>
-            </div>
-
-            <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
-                <span class="material-symbols-outlined text-primary text-2xl mb-3 block">payments</span>
-                <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Meal Packages', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('Full board (breakfast, lunch, dinner): BDT 800 per day per person. Half board (breakfast and dinner): BDT 550 per day per person.', 'thanchi-eco-resort'); ?></p>
-            </div>
+            <?php foreach ( $food_notes as $note ) : ?>
+                <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
+                    <span class="material-symbols-outlined text-primary text-2xl mb-3 block"><?php echo esc_html( $note['icon'] ); ?></span>
+                    <h3 class="font-bold text-lg mb-2"><?php echo esc_html( $note['title'] ); ?></h3>
+                    <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php echo esc_html( $note['description'] ); ?></p>
+                </div>
+            <?php endforeach; ?>
         </div>
 
         <div class="text-center mt-12">
-            <p class="italic text-[#6b635b] dark:text-[#a9a29a] mb-6"><?php esc_html_e('Prices may vary based on seasonal availability.', 'thanchi-eco-resort'); ?></p>
+            <p class="italic text-[#6b635b] dark:text-[#a9a29a] mb-6"><?php echo esc_html( $pricing_text ); ?></p>
             <a href="<?php echo esc_url(home_url('/rooms/')); ?>" class="inline-block bg-primary hover:bg-[#855935] text-white px-10 py-4 rounded-lg font-bold transition-all">
                 <?php esc_html_e('Book Your Stay & Meals', 'thanchi-eco-resort'); ?>
             </a>

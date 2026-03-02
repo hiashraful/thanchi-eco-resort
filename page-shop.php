@@ -10,17 +10,77 @@ if (!defined('ABSPATH')) {
 }
 
 get_header();
+
+// --- Load settings with hardcoded defaults ---
+$header_image       = thanchi_setting( 'page_shop', 'header_image', '' );
+$header_image_url   = $header_image ? $header_image : THANCHI_URI . '/assets/images/experience-shop.jpg';
+$header_label       = thanchi_setting( 'page_shop', 'header_label', __( 'Handcrafted', 'thanchi-eco-resort' ) );
+$header_title       = thanchi_setting( 'page_shop', 'header_title', __( 'Local Crafts Shop', 'thanchi-eco-resort' ) );
+$header_description = thanchi_setting( 'page_shop', 'header_description', __( 'Handcrafted items made by local tribal artisans. Every purchase supports the community and preserves traditional craftsmanship.', 'thanchi-eco-resort' ) );
+$intro_text         = thanchi_setting( 'page_shop', 'intro_text', __( 'The items in this shop are not made in factories. They are crafted by hands that have learned from generations. When you buy from here, you take home a piece of Thanchi and help sustain families who have lived in these hills for centuries.', 'thanchi-eco-resort' ) );
+
+// Products: use saved settings if available, otherwise fall back to hardcoded defaults.
+$saved_products = thanchi_setting( 'page_shop', 'products', array() );
+$default_products = array(
+    array(
+        'name'        => __( 'Bamboo Basket', 'thanchi-eco-resort' ),
+        'description' => __( 'Handwoven bamboo basket, perfect for storage or decoration. Made by Marma tribal women.', 'thanchi-eco-resort' ),
+        'price'       => 450,
+        'tag'         => __( 'Bestseller', 'thanchi-eco-resort' ),
+        'image'       => '',
+    ),
+    array(
+        'name'        => __( 'Tribal Shawl', 'thanchi-eco-resort' ),
+        'description' => __( 'Traditional handloom shawl with tribal patterns. Each design tells a story of the hills.', 'thanchi-eco-resort' ),
+        'price'       => 1200,
+        'tag'         => __( 'Handloom', 'thanchi-eco-resort' ),
+        'image'       => '',
+    ),
+    array(
+        'name'        => __( 'Wild Honey', 'thanchi-eco-resort' ),
+        'description' => __( 'Pure wild honey collected from the forests of Thanchi. 500ml bottle.', 'thanchi-eco-resort' ),
+        'price'       => 600,
+        'tag'         => __( 'Natural', 'thanchi-eco-resort' ),
+        'image'       => '',
+    ),
+    array(
+        'name'        => __( 'Bamboo Flute', 'thanchi-eco-resort' ),
+        'description' => __( 'Traditional bamboo flute. The sound of the hills in your hands.', 'thanchi-eco-resort' ),
+        'price'       => 350,
+        'tag'         => __( 'Handcrafted', 'thanchi-eco-resort' ),
+        'image'       => '',
+    ),
+);
+$products = ! empty( $saved_products ) ? $saved_products : $default_products;
+
+// Story cards: use saved settings if available, otherwise fall back to hardcoded defaults.
+$saved_story_cards = thanchi_setting( 'page_shop', 'story_cards', array() );
+$default_story_cards = array(
+    array(
+        'title'       => __( 'Handmade by Tribal Artisans', 'thanchi-eco-resort' ),
+        'description' => __( 'The Marma, Murong, and other tribal communities of the Chittagong Hill Tracts have preserved their craftsmanship for generations. Each basket, each shawl, each item carries the knowledge passed down from mothers to daughters, fathers to sons.', 'thanchi-eco-resort' ),
+    ),
+    array(
+        'title'       => __( 'Sustainable & Natural Materials', 'thanchi-eco-resort' ),
+        'description' => __( 'All our products use materials sourced from the local environment - bamboo from the hills, cotton grown in the valleys, honey from forest bees. No synthetic materials, no chemicals, no machines.', 'thanchi-eco-resort' ),
+    ),
+    array(
+        'title'       => __( 'Fair Trade Prices', 'thanchi-eco-resort' ),
+        'description' => __( 'The artisans set their own prices. We add nothing for profit. The full amount goes directly to the maker. When you buy from us, you know exactly where your money goes.', 'thanchi-eco-resort' ),
+    ),
+);
+$story_cards = ! empty( $saved_story_cards ) ? $saved_story_cards : $default_story_cards;
 ?>
 
 <!-- Page Header -->
 <section class="relative min-h-[60vh] flex items-center -mt-20 pt-40 bg-background-dark">
     <div class="hero-gradient absolute inset-0 bg-background-dark"></div>
-    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('<?php echo esc_url(THANCHI_URI . '/assets/images/experience-shop.jpg'); ?>');"></div>
+    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('<?php echo esc_url( $header_image_url ); ?>');"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center w-full">
-        <span class="text-primary font-bold tracking-widest text-sm uppercase mb-4 block"><?php esc_html_e('Handcrafted', 'thanchi-eco-resort'); ?></span>
-        <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6"><?php esc_html_e('Local Crafts Shop', 'thanchi-eco-resort'); ?></h1>
+        <span class="text-primary font-bold tracking-widest text-sm uppercase mb-4 block"><?php echo esc_html( $header_label ); ?></span>
+        <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6"><?php echo esc_html( $header_title ); ?></h1>
         <p class="text-lg text-[#a9a29a] max-w-2xl mx-auto">
-            <?php esc_html_e('Handcrafted items made by local tribal artisans. Every purchase supports the community and preserves traditional craftsmanship.', 'thanchi-eco-resort'); ?>
+            <?php echo esc_html( $header_description ); ?>
         </p>
     </div>
 </section>
@@ -29,7 +89,7 @@ get_header();
 <section class="py-24 bg-background-light dark:bg-background-dark">
     <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center">
         <p class="text-lg text-[#6b635b] dark:text-[#a9a29a] leading-relaxed">
-            <?php esc_html_e('The items in this shop are not made in factories. They are crafted by hands that have learned from generations. When you buy from here, you take home a piece of Thanchi and help sustain families who have lived in these hills for centuries.', 'thanchi-eco-resort'); ?>
+            <?php echo esc_html( $intro_text ); ?>
         </p>
     </div>
 </section>
@@ -46,32 +106,6 @@ get_header();
             </div>
             <?php
         } else {
-            $placeholder_products = array(
-                array(
-                    'name'        => __('Bamboo Basket', 'thanchi-eco-resort'),
-                    'description' => __('Handwoven bamboo basket, perfect for storage or decoration. Made by Marma tribal women.', 'thanchi-eco-resort'),
-                    'price'       => 450,
-                    'tag'         => __('Bestseller', 'thanchi-eco-resort'),
-                ),
-                array(
-                    'name'        => __('Tribal Shawl', 'thanchi-eco-resort'),
-                    'description' => __('Traditional handloom shawl with tribal patterns. Each design tells a story of the hills.', 'thanchi-eco-resort'),
-                    'price'       => 1200,
-                    'tag'         => __('Handloom', 'thanchi-eco-resort'),
-                ),
-                array(
-                    'name'        => __('Wild Honey', 'thanchi-eco-resort'),
-                    'description' => __('Pure wild honey collected from the forests of Thanchi. 500ml bottle.', 'thanchi-eco-resort'),
-                    'price'       => 600,
-                    'tag'         => __('Natural', 'thanchi-eco-resort'),
-                ),
-                array(
-                    'name'        => __('Bamboo Flute', 'thanchi-eco-resort'),
-                    'description' => __('Traditional bamboo flute. The sound of the hills in your hands.', 'thanchi-eco-resort'),
-                    'price'       => 350,
-                    'tag'         => __('Handcrafted', 'thanchi-eco-resort'),
-                ),
-            );
             ?>
 
             <!-- Coming Soon Notice -->
@@ -84,14 +118,20 @@ get_header();
 
             <!-- Product Grid -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <?php foreach ($placeholder_products as $index => $product) : ?>
+                <?php foreach ( $products as $index => $product ) : ?>
+                    <?php
+                    // Use product image from settings if available, otherwise use the numbered placeholder.
+                    $product_image = ! empty( $product['image'] )
+                        ? $product['image']
+                        : THANCHI_URI . '/assets/images/product-' . ( $index + 1 ) . '-placeholder.jpg';
+                    ?>
                     <article class="bg-white dark:bg-[#25211c] rounded-2xl overflow-hidden border border-[#e8e5e2] dark:border-[#3a342e] shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col">
 
                         <!-- Image with hover overlay -->
                         <div class="relative aspect-[4/3] overflow-hidden bg-[#f2f1ef] dark:bg-[#1d1915]">
                             <img
-                                src="<?php echo esc_url(THANCHI_URI . '/assets/images/product-' . ($index + 1) . '-placeholder.jpg'); ?>"
-                                alt="<?php echo esc_attr($product['name']); ?>"
+                                src="<?php echo esc_url( $product_image ); ?>"
+                                alt="<?php echo esc_attr( $product['name'] ); ?>"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 loading="lazy"
                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -125,7 +165,7 @@ get_header();
                             <!-- Price + Button row -->
                             <div class="flex items-center justify-between gap-3 mt-auto">
                                 <span class="inline-block bg-primary/10 dark:bg-primary/20 text-primary font-bold text-sm px-3 py-1.5 rounded-full">
-                                    BDT <?php echo esc_html(number_format($product['price'])); ?>
+                                    BDT <?php echo esc_html(number_format( (int) $product['price'] )); ?>
                                 </span>
                                 <a href="<?php echo esc_url(home_url('/contact/')); ?>"
                                    class="inline-flex items-center gap-1.5 bg-primary hover:bg-[#855935] text-white text-sm font-bold px-4 py-2 rounded-lg transition-all duration-200 shadow-sm hover:shadow">
@@ -152,20 +192,12 @@ get_header();
         </div>
 
         <div class="space-y-8">
-            <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
-                <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Handmade by Tribal Artisans', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('The Marma, Murong, and other tribal communities of the Chittagong Hill Tracts have preserved their craftsmanship for generations. Each basket, each shawl, each item carries the knowledge passed down from mothers to daughters, fathers to sons.', 'thanchi-eco-resort'); ?></p>
-            </div>
-
-            <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
-                <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Sustainable & Natural Materials', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('All our products use materials sourced from the local environment - bamboo from the hills, cotton grown in the valleys, honey from forest bees. No synthetic materials, no chemicals, no machines.', 'thanchi-eco-resort'); ?></p>
-            </div>
-
-            <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
-                <h3 class="font-bold text-lg mb-2"><?php esc_html_e('Fair Trade Prices', 'thanchi-eco-resort'); ?></h3>
-                <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php esc_html_e('The artisans set their own prices. We add nothing for profit. The full amount goes directly to the maker. When you buy from us, you know exactly where your money goes.', 'thanchi-eco-resort'); ?></p>
-            </div>
+            <?php foreach ( $story_cards as $card ) : ?>
+                <div class="bg-white dark:bg-background-dark p-6 rounded-xl">
+                    <h3 class="font-bold text-lg mb-2"><?php echo esc_html( $card['title'] ); ?></h3>
+                    <p class="text-sm text-[#6b635b] dark:text-[#a9a29a]"><?php echo esc_html( $card['description'] ); ?></p>
+                </div>
+            <?php endforeach; ?>
         </div>
 
         <div class="text-center mt-12">

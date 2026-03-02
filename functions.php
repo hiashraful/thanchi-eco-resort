@@ -437,8 +437,12 @@ function thanchi_preload_critical() {
     ?>
     <link rel="preload" href="<?php echo esc_url(THANCHI_URI . '/assets/fonts/Inter/Inter-Variable.woff2'); ?>" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="<?php echo esc_url(THANCHI_URI . '/assets/fonts/PlayfairDisplay/PlayfairDisplay-Variable.woff2'); ?>" as="font" type="font/woff2" crossorigin>
-    <?php if (is_front_page()) : ?>
-    <link rel="preload" href="<?php echo esc_url(THANCHI_URI . '/assets/images/hero-bg.jpg'); ?>" as="image" fetchpriority="high">
+    <?php if (is_front_page()) :
+        $hero_img = function_exists('thanchi_setting')
+            ? thanchi_setting('page_home', 'hero_image', THANCHI_URI . '/assets/images/hero-bg.jpg')
+            : THANCHI_URI . '/assets/images/hero-bg.jpg';
+    ?>
+    <link rel="preload" href="<?php echo esc_url($hero_img); ?>" as="image" fetchpriority="high">
     <?php endif; ?>
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <?php
@@ -621,9 +625,38 @@ class Thanchi_Tailwind_Nav_Walker extends Walker_Nav_Menu {
 }
 
 /**
- * Get rooms data (simulated for demo)
+ * Get rooms data.
+ *
+ * Checks Rooms Page admin settings first; if non-empty, returns those.
+ * Otherwise falls back to the hardcoded default array.
  */
 function thanchi_get_rooms() {
+    // Check admin settings first (requires admin-settings.php to be loaded)
+    if ( function_exists( 'thanchi_setting' ) ) {
+        $saved = thanchi_setting( 'page_rooms', 'rooms', array() );
+        if ( ! empty( $saved ) && is_array( $saved ) ) {
+            // Normalise each room item to ensure all expected keys exist
+            $rooms = array();
+            foreach ( $saved as $item ) {
+                $room = array(
+                    'title'       => isset( $item['title'] )       ? $item['title']       : '',
+                    'description' => isset( $item['description'] ) ? $item['description'] : '',
+                    'price'       => isset( $item['price'] )       ? $item['price']       : 0,
+                    'image'       => isset( $item['image'] )       ? $item['image']       : '',
+                    'amenities'   => isset( $item['amenities'] )   ? $item['amenities']   : array(),
+                    'badge'       => isset( $item['badge'] )       ? $item['badge']       : '',
+                    'currency'    => 'USD',
+                );
+                // If amenities is a newline-separated string, convert to array
+                if ( is_string( $room['amenities'] ) ) {
+                    $room['amenities'] = array_filter( array_map( 'trim', explode( "\n", $room['amenities'] ) ) );
+                }
+                $rooms[] = $room;
+            }
+            return $rooms;
+        }
+    }
+
     return array(
         array(
             'title' => 'Bamboo Cottage',
@@ -674,9 +707,20 @@ function thanchi_get_rooms() {
 }
 
 /**
- * Get experiences data
+ * Get experiences data.
+ *
+ * Checks Home Page admin settings first; if non-empty, returns those.
+ * Otherwise falls back to the hardcoded default array.
  */
 function thanchi_get_experiences() {
+    // Check admin settings first (requires admin-settings.php to be loaded)
+    if ( function_exists( 'thanchi_setting' ) ) {
+        $saved = thanchi_setting( 'page_home', 'experiences', array() );
+        if ( ! empty( $saved ) && is_array( $saved ) ) {
+            return $saved;
+        }
+    }
+
     return array(
         array(
             'title' => 'Indigenous Dining',
@@ -725,10 +769,16 @@ function thanchi_get_testimonials() {
 }
 
 /**
- * Get menu items
+ * Get menu items.
+ *
+ * Checks admin settings first. If ALL categories are empty (no saved items),
+ * returns the hardcoded defaults. If any category has saved items, builds the
+ * result from saved values, falling back to hardcoded defaults for any missing
+ * categories.
  */
 function thanchi_get_menu_items() {
-    return array(
+    // Hardcoded defaults
+    $defaults = array(
         'breakfast' => array(
             array('name' => 'Hill Bread with Local Honey', 'description' => 'Fresh bread made in clay oven, served with wild honey from local beekeepers', 'price' => 150),
             array('name' => 'Banana Pancake', 'description' => 'Pancakes made with local bananas and jaggery', 'price' => 180),
@@ -750,12 +800,52 @@ function thanchi_get_menu_items() {
             array('name' => 'Wild Honey Drink', 'description' => 'Refreshing drink made with wild honey and lime', 'price' => 80),
         ),
     );
+
+    // Check saved settings for each category
+    $saved_breakfast      = thanchi_setting( 'page_restaurant', 'breakfast', array() );
+    $saved_lunch          = thanchi_setting( 'page_restaurant', 'lunch', array() );
+    $saved_dinner         = thanchi_setting( 'page_restaurant', 'dinner', array() );
+    $saved_tribal_special = thanchi_setting( 'page_restaurant', 'tribal_special', array() );
+
+    // If ALL categories are empty, return hardcoded defaults
+    if ( empty( $saved_breakfast ) && empty( $saved_lunch ) && empty( $saved_dinner ) && empty( $saved_tribal_special ) ) {
+        return $defaults;
+    }
+
+    // Build result from saved values, using defaults for any missing categories
+    return array(
+        'breakfast'      => ! empty( $saved_breakfast )      ? $saved_breakfast      : $defaults['breakfast'],
+        'lunch'          => ! empty( $saved_lunch )          ? $saved_lunch          : $defaults['lunch'],
+        'dinner'         => ! empty( $saved_dinner )         ? $saved_dinner         : $defaults['dinner'],
+        'tribal_special' => ! empty( $saved_tribal_special ) ? $saved_tribal_special : $defaults['tribal_special'],
+    );
 }
 
 /**
- * Get people (founders)
+ * Get people (founders).
+ *
+ * Checks About Page admin settings first; if non-empty, returns those.
+ * Otherwise falls back to the hardcoded default array.
  */
 function thanchi_get_people() {
+    // Check admin settings first (requires admin-settings.php to be loaded)
+    if ( function_exists( 'thanchi_setting' ) ) {
+        $saved = thanchi_setting( 'page_about', 'people', array() );
+        if ( ! empty( $saved ) && is_array( $saved ) ) {
+            // Normalise each person item to ensure all expected keys exist
+            $people = array();
+            foreach ( $saved as $item ) {
+                $people[] = array(
+                    'name'        => isset( $item['name'] )        ? $item['name']        : '',
+                    'role'        => isset( $item['role'] )        ? $item['role']        : '',
+                    'description' => isset( $item['description'] ) ? $item['description'] : '',
+                    'image'       => isset( $item['image'] )       ? $item['image']       : '',
+                );
+            }
+            return $people;
+        }
+    }
+
     return array(
         array(
             'name' => 'Ubaidul Islam Shohag',
